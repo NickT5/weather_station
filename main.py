@@ -29,10 +29,5 @@ def main():
         weather_station.run()
 
 
-def system_info():
-    print(sys.executable)
-    print(sys.version)
-
-
 if __name__ == "__main__":
     main()

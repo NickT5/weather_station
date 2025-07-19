@@ -1,0 +1,13 @@
+services:
+  weather-station:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app.py:/home/pi/app/app.py
+      - ./main.py:/home/pi/app/main.py
+      - ./weather_station.py:/home/pi/app/weather_station.py
+      - ./templates:/home/pi/app/templates
+
+    restart: unless-stopped
+    command: ["uv", "run", "app.py"]
