@@ -6,6 +6,7 @@ A simple weather application that provides current weather information for locat
 
 - Command-line interface (CLI) for quick weather checks
 - Web interface for a more visual experience
+- Interactive map showing the searched location
 - Current weather conditions including temperature, humidity, pressure, and wind
 - Support for location search by city and country name
 
@@ -47,6 +48,7 @@ Then open your browser and navigate to http://127.0.0.1:5000/
 - Python standard library (no external dependencies for core functionality)
 - Flask (for web interface)
 - Open-Meteo API (free weather data)
+- Leaflet.js (for interactive maps)
 - uv (for dependency management and running the application)
 
 ## Development

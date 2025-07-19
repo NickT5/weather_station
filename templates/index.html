@@ -28,32 +28,62 @@
             <p>Time: {{ weather_data.current.time }}</p>
             <p>Coordinates: {{ weather_data.latitude|round(4) }}°, {{ weather_data.longitude|round(4) }}°</p>
         </div>
-        
+
+        <div class="weather-item" style="grid-column: 1 / -1;">
+            <h3>🗺️ Location Map</h3>
+            <div id="map"></div>
+        </div>
+
         <div class="weather-item">
             <h3>🌡️ Temperature</h3>
             <p>{{ weather_data.current.temperature_2m }}°C ({{ weather_data.current.temperature_2m|celsius_to_fahrenheit|round(1) }}°F)</p>
         </div>
-        
+
         <div class="weather-item">
             <h3>☁️ Conditions</h3>
             <p>{{ weather_data.current.weather_code|get_weather_description }}</p>
         </div>
-        
+
         <div class="weather-item">
             <h3>💧 Humidity</h3>
             <p>{{ weather_data.current.relative_humidity_2m }}%</p>
         </div>
-        
+
         <div class="weather-item">
             <h3>🔄 Pressure</h3>
             <p>{{ weather_data.current.surface_pressure }} hPa</p>
         </div>
-        
+
         <div class="weather-item">
             <h3>💨 Wind</h3>
             <p>{{ weather_data.current.wind_speed_10m }} km/h from {{ weather_data.current.wind_direction_10m }}°</p>
         </div>
     </div>
 </div>
+
+{% if weather_data and location_name %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get coordinates from the weather data
+        var lat = parseFloat("{{ weather_data.latitude }}");
+        var lon = parseFloat("{{ weather_data.longitude }}");
+        var locationName = "{{ location_name }}";
+
+        // Initialize the map
+        var map = L.map('map').setView([lat, lon], 10);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker at the location
+        L.marker([lat, lon])
+            .addTo(map)
+            .bindPopup(locationName)
+            .openPopup();
+    });
+</script>
+{% endif %}
 {% endif %}
 {% endblock %}
