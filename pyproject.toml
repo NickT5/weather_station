@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pre-commit>=4.2.0",
+    "flask>=2.0.0",
 ]
 
 [tool.ruff]
